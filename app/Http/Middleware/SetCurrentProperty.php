@@ -1,10 +1,10 @@
 <?php
 
-namespace Hotpms\Http\Middleware;
+namespace Hospms\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Hotpms\Property;
+use Hospms\Property;
 
 
 class SetCurrentProperty

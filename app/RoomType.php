@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
@@ -25,19 +25,19 @@ class RoomType extends Model
     ];
     
     public function servicePlans(){
-    	return $this->hasOne("Hotpms\ServicePlan", "id", "id_service_plan");
+    	return $this->hasOne("Hospms\ServicePlan", "id", "id_service_plan");
     }
     
     public function facilityPlans(){
-    	return $this->hasOne('Hotpms\FacilityPlan', 'id', 'id_facilities_plan');
+    	return $this->hasOne('Hospms\FacilityPlan', 'id', 'id_facilities_plan');
     }
     
     public function bedType(){
-    	return $this->hasOne('Hotpms\BedType', 'id', 'id_bed_type');
+    	return $this->hasOne('Hospms\BedType', 'id', 'id_bed_type');
     }
     
     public function pictures(){
-    	return $this->hasMany('Hotpms\RoomPicture','id_room_types', 'id');
+    	return $this->hasMany('Hospms\RoomPicture','id_room_types', 'id');
     }
     
     public function removePictures(){

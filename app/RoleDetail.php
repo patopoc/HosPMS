@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,7 @@ class RoleDetail extends Model
     protected $fillable = ['id','id_role','id_module','mod_show', 'mod_insert', 'mod_update','mod_delete'];
     
     public function module(){
-    	return $this->hasOne('Hotpms\Module','id','id_module');
+    	return $this->hasOne('Hospms\Module','id','id_module');
     }
 
 }

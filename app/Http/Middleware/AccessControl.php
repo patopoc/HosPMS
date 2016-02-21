@@ -1,11 +1,11 @@
 <?php
 
-namespace Hotpms\Http\Middleware;
+namespace Hospms\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Hotpms\Module;
-use Hotpms\RoleDetail;
+use Hospms\Module;
+use Hospms\RoleDetail;
 
 
 class AccessControl

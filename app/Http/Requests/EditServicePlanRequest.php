@@ -1,8 +1,8 @@
 <?php
 
-namespace Hotpms\Http\Requests;
+namespace Hospms\Http\Requests;
 
-use Hotpms\Http\Requests\Request;
+use Hospms\Http\Requests\Request;
 use Illuminate\Routing\Route;
 
 class EditServicePlanRequest extends Request

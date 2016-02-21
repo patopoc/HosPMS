@@ -1,15 +1,15 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Hotpms\BedType;
-use Hotpms\Http\Requests\CreateBedTypeRequest;
-use Hotpms\Http\Requests\EditBedTypeRequest;
+use Hospms\BedType;
+use Hospms\Http\Requests\CreateBedTypeRequest;
+use Hospms\Http\Requests\EditBedTypeRequest;
 
 class BedTypeController extends Controller
 {

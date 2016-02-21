@@ -1,5 +1,5 @@
 <?php
-namespace Hotpms\Helpers;
+namespace Hospms\Helpers;
 class DateHelper{
 	
 	public static $mons = array(1 => "Jan", 2 => "Feb", 3 => "Mar",

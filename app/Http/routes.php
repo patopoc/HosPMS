@@ -1,6 +1,6 @@
 <?php
 
-use Hotpms\Person;
+use Hospms\Person;
 /*
 |--------------------------------------------------------------------------
 | Application Routes

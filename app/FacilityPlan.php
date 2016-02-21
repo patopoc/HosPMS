@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,6 @@ class FacilityPlan extends Model
     protected $fillable= ['name'];
     
     public function facilities(){
-    	return $this->belongsToMany('Hotpms\Facility','facilities_facilities_plan', 'id_facilities_plan','id_facilities');
+    	return $this->belongsToMany('Hospms\Facility','facilities_facilities_plan', 'id_facilities_plan','id_facilities');
     }
 }

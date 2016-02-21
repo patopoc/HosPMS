@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Exceptions;
+namespace Hospms\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

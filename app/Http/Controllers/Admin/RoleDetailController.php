@@ -1,15 +1,15 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Controllers\Controller;
+use Hospms\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
-use Hotpms\Module;
-use Hotpms\Role;
-use Hotpms\RoleDetail;
+use Hospms\Module;
+use Hospms\Role;
+use Hospms\RoleDetail;
 
 class RoleDetailController extends Controller
 {

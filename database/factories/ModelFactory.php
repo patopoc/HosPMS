@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(Hotpms\User::class, function ($faker) {
+$factory->define(Hospms\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,

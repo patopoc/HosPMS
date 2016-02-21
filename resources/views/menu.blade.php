@@ -1,5 +1,5 @@
 <?php 
-use \Hotpms\Helpers\MenuHelper;
+use \Hospms\Helpers\MenuHelper;
 $menu= MenuHelper::create();
 ?>
 @section('menu')

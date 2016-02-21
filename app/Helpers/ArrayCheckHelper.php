@@ -1,5 +1,5 @@
 <?php
-namespace Hotpms\Helpers;
+namespace Hospms\Helpers;
 
 class ArrayCheckHelper{
 	

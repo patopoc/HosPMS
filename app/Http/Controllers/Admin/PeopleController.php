@@ -1,17 +1,18 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Person;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Person;
 use Illuminate\Support\Facades\Session;
 use Webpatser\Countries\Countries;
-use Hotpms\Http\Requests\CreatePersonRequest;
-use Hotpms\Http\Requests\EditPersonRequest;
+use Hospms\Http\Requests\CreatePersonRequest;
+use Hospms\Http\Requests\EditPersonRequest;
 use Illuminate\Database\QueryException;
+use Hospms\Helpers\ModelHelper;
 
 
 class PeopleController extends Controller
@@ -19,10 +20,16 @@ class PeopleController extends Controller
 	
 	public $countriesShortList;
 	
+	private $data;
+	
 	public function __construct(){
 		
 		$this->middleware('access_control');
 		$currentRoute= $this->getRouter()->current()->getAction()["as"];
+		
+		//take the controller name from the route name		
+		$this->data["controllerRouteName"]= explode(".", $currentRoute)[1];		
+		
 		$this->middleware('set_current_section:'.$currentRoute);
 		
 		$this->countriesShortList= \DB::table('countries')->lists('name', 'country_code');
@@ -36,13 +43,28 @@ class PeopleController extends Controller
     public function index(Request $request)    
     {
     	$people=null;
+    	$labels= [
+    			"key" => "models.person",
+    			"title" => "titleList",
+    			"list" => [
+    					"ci" => "link",
+    					"name" => "text",
+    					"last_name" => "text",
+    					"country" => "text",
+    			],
+    	];
+    	   	
     	if($request->has('name')){
 			$people= Person::name($request->get('name'))->paginate(10);    	
     	}
     	else{
 			$people= Person::paginate(5);
     	}
-		return view('admin.people.index', compact('people'));		
+    	
+    	$data= $this->data;
+    	$data["labels"]= $labels;
+    	$data["model"]= $people;
+		return view('admin.commoncrud.index', compact('data'));		
     }
 
     /**
@@ -51,9 +73,24 @@ class PeopleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    	   	
-    	$data['countries']= $this->countriesShortList;
-    	return view('admin.people.create', compact('data'));
+    {    	  
+    	$fields= [
+    			"key" => "models.person",
+    			"title" => "titleCreate",
+    			"fields" => [
+    					"ci" => "text",
+    					"name" => "text",
+    					"last_name" => "text",
+    					"email" => "email",
+    					"telephone" => "text",
+    					"id_country" => "select",
+    			],
+    	];
+    	
+    	$data= $this->data;
+    	$data['fieldsData']= $fields;    	
+    	$data['selectData']= array(""=>"Select Country") + $this->countriesShortList;    	
+    	return view('admin.commoncrud.create', compact('data'));
     }
 
     /**
@@ -66,7 +103,7 @@ class PeopleController extends Controller
     {
         Person::create($request->all());
         
-        return \Redirect::route('admin.people.index');
+        return \Redirect::route('admin.commoncrud.index');
     }
 
     /**
@@ -88,11 +125,26 @@ class PeopleController extends Controller
      */
     public function edit($id)
     {
-        $data["person"]= Person::findOrFail($id);
-        $data["countries"]= $this->countriesShortList;
+    	$fields= [
+    			"key" => "models.person",
+    			"title" => "titleEdit",
+    			"fields" => [
+    					"ci" => "text",
+    					"name" => "text",
+    					"last_name" => "text",
+    					"email" => "email",
+    					"telephone" => "text",
+    					"id_country" => "select",
+    			],
+    	];
+    	
+    	$data= $this->data;
+    	$data['fieldsData']= $fields;
+        $data["model"]= Person::findOrFail($id);
+        $data["selectData"]= array(""=>"Select Country") + $this->countriesShortList;
         
         
-        return view('admin.people.edit', compact('data'));
+        return view('admin.commoncrud.edit', compact('data'));
     }
 
     /**
@@ -115,7 +167,7 @@ class PeopleController extends Controller
         
         Session::flash('message', $message);        
         
-        return redirect()->route('admin.people.index');
+        return redirect()->route('admin.commoncrud.index');
   
     }
 
@@ -149,6 +201,6 @@ class PeopleController extends Controller
         
         Session::flash('message', $message);        
         
-        return redirect()->route('admin.people.index');
+        return redirect()->route('admin.commoncrud.index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Http\Middleware;
+namespace Hospms\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

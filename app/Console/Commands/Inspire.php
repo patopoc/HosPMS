@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Console\Commands;
+namespace Hospms\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

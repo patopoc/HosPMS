@@ -1,8 +1,8 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Auth;
+namespace Hospms\Http\Controllers\Auth;
 
-use Hotpms\Http\Controllers\Controller;
+use Hospms\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

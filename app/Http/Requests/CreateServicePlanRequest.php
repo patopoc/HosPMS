@@ -1,8 +1,8 @@
 <?php
 
-namespace Hotpms\Http\Requests;
+namespace Hospms\Http\Requests;
 
-use Hotpms\Http\Requests\Request;
+use Hospms\Http\Requests\Request;
 
 class CreateServicePlanRequest extends Request
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -31,15 +31,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public $timestamps= false;
     
     public function person(){
-    	return $this->hasOne('Hotpms\Person', 'id', 'id_person');
+    	return $this->hasOne('Hospms\Person', 'id', 'id_person');
     }
     
     public function role(){
-    	return $this->hasOne('Hotpms\Role', 'id', 'id_role');
+    	return $this->hasOne('Hospms\Role', 'id', 'id_role');
     }
     
     public function properties(){
-    	return $this->belongsToMany('Hotpms\Property', 'user_assigned_properties', 'id_user', 'id_property');
+    	return $this->belongsToMany('Hospms\Property', 'user_assigned_properties', 'id_user', 'id_property');
     }
     
     public function setPasswordAttribute($value){

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Http\Middleware;
+namespace Hospms\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

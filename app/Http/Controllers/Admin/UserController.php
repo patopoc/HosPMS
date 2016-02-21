@@ -1,18 +1,18 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\User;
-use Hotpms\Country;
-use Hotpms\Person;
-use Hotpms\Http\Requests\CreateUserRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\User;
+use Hospms\Country;
+use Hospms\Person;
+use Hospms\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditUserRequest;
-use Hotpms\Helpers\ArrayCheckHelper;
+use Hospms\Http\Requests\EditUserRequest;
+use Hospms\Helpers\ArrayCheckHelper;
 
 class UserController extends Controller
 {

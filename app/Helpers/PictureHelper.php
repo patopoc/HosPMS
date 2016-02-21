@@ -1,8 +1,8 @@
 <?php
-namespace Hotpms\Helpers;
+namespace Hospms\Helpers;
 use Image;
 use Illuminate\Database\Eloquent\Model;
-use Hotpms\Picture;
+use Hospms\Picture;
 
 class PictureHelper{
 	public static function savePictures($pictures, $moduleModel, $type="picture"){

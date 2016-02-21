@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,7 @@ class Role extends Model
     protected $fillable = ['name'];
     
     public function roleDetails(){
-    	return $this->hasMany('Hotpms\RoleDetail','id_role','id');
+    	return $this->hasMany('Hospms\RoleDetail','id_role','id');
     }
 
 }

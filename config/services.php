@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Hotpms\User::class,
+        'model'  => Hospms\User::class,
         'key' => '',
         'secret' => '',
     ],

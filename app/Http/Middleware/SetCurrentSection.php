@@ -1,9 +1,9 @@
 <?php
 
-namespace Hotpms\Http\Middleware;
+namespace Hospms\Http\Middleware;
 
 use Closure;
-use Hotpms\Menu;
+use Hospms\Menu;
 
 class SetCurrentSection
 {

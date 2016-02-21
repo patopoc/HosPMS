@@ -150,9 +150,9 @@ return [
         /*
          * Application Service Providers...
          */
-        Hotpms\Providers\AppServiceProvider::class,
-        Hotpms\Providers\EventServiceProvider::class,
-        Hotpms\Providers\RouteServiceProvider::class,
+        Hospms\Providers\AppServiceProvider::class,
+        Hospms\Providers\EventServiceProvider::class,
+        Hospms\Providers\RouteServiceProvider::class,
 
     ],
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Http\Controllers;
+namespace Hospms\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

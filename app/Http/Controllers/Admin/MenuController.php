@@ -1,14 +1,14 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Helpers\MenuHelper;
-use Hotpms\Module;
-use Hotpms\Menu;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Helpers\MenuHelper;
+use Hospms\Module;
+use Hospms\Menu;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 

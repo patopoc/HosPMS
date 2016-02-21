@@ -1,18 +1,18 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Http\Requests\CreateServicePlanRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Http\Requests\CreateServicePlanRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditServiceRequest;
-use Hotpms\ServicePlan;
+use Hospms\Http\Requests\EditServiceRequest;
+use Hospms\ServicePlan;
 use Illuminate\Database\Eloquent\Model;
-use Hotpms\Http\Requests\EditServicePlanRequest;
-use Hotpms\Helpers\ArrayCheckHelper;
+use Hospms\Http\Requests\EditServicePlanRequest;
+use Hospms\Helpers\ArrayCheckHelper;
 
 class ServicePlanController extends Controller
 {

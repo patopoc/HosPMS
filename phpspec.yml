@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: Hotpms
-        psr4_prefix: Hotpms
+        namespace: Hospms
+        psr4_prefix: Hospms
         src_path: app

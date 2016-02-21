@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Http\Requests;
+namespace Hospms\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

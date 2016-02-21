@@ -1,6 +1,6 @@
-<?php namespace Hotpms\Http\Requests;
+<?php namespace Hospms\Http\Requests;
 
-use Hotpms\Http\Requests\Request;
+use Hospms\Http\Requests\Request;
 
 class CreateUserRequest extends Request {
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Http\Requests\CreateServiceRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Http\Requests\CreateServiceRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditServiceRequest;
-use Hotpms\Service;
+use Hospms\Http\Requests\EditServiceRequest;
+use Hospms\Service;
 
 class ServicesController extends Controller
 {

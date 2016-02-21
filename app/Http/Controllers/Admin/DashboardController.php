@@ -1,14 +1,14 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Booking;
-use Hotpms\RoomType;
-use Hotpms\Helpers\DateHelper;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Booking;
+use Hospms\RoomType;
+use Hospms\Helpers\DateHelper;
 
 class DashboardController extends Controller
 {

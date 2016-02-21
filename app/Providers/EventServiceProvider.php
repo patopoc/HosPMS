@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Providers;
+namespace Hospms\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Hotpms\Events\SomeEvent' => [
-            'Hotpms\Listeners\EventListener',
+        'Hospms\Events\SomeEvent' => [
+            'Hospms\Listeners\EventListener',
         ],
     ];
 

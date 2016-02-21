@@ -1,16 +1,16 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Booking;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Booking;
 use Illuminate\Database\Eloquent\Model;
-use Hotpms\Person;
+use Hospms\Person;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Helpers\DateHelper;
+use Hospms\Helpers\DateHelper;
 
 
 class BookingController extends Controller

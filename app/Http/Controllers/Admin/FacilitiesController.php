@@ -1,15 +1,15 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Http\Requests\CreateFacilityRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Http\Requests\CreateFacilityRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditFacilityRequest;
-use Hotpms\Facility;
+use Hospms\Http\Requests\EditFacilityRequest;
+use Hospms\Facility;
 
 class FacilitiesController extends Controller
 {

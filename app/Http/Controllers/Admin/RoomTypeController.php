@@ -1,16 +1,16 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Hotpms\RoomType;
-use Hotpms\Http\Requests\CreateRoomTypeRequest;
-use Hotpms\Http\Requests\EditRoomTypeRequest;
-use Hotpms\RoomPicture;
+use Hospms\RoomType;
+use Hospms\Http\Requests\CreateRoomTypeRequest;
+use Hospms\Http\Requests\EditRoomTypeRequest;
+use Hospms\RoomPicture;
 use Illuminate\Database\Eloquent\Model;
 use Image;
 class RoomTypeController extends Controller

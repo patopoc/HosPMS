@@ -1,19 +1,19 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Http\Requests\CreateFacilityPlanRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Http\Requests\CreateFacilityPlanRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditServiceRequest;
-use Hotpms\FacilityPlan;
+use Hospms\Http\Requests\EditServiceRequest;
+use Hospms\FacilityPlan;
 use Illuminate\Database\Eloquent\Model;
-use Hotpms\Http\Requests\EditFacilityPlanRequest;
-use Hotpms\Facility;
-use Hotpms\Helpers\ArrayCheckHelper;
+use Hospms\Http\Requests\EditFacilityPlanRequest;
+use Hospms\Facility;
+use Hospms\Helpers\ArrayCheckHelper;
 
 class FacilityPlanController extends Controller
 {

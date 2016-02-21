@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Property extends Model
     ];
     
     public function pictures(){
-    	return $this->hasMany('Hotpms\Picture','id_module','id');
+    	return $this->hasMany('Hospms\Picture','id_module','id');
     }
     
     public function getLogoAttribute(){

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Jobs;
+namespace Hospms\Jobs;
 
 use Illuminate\Bus\Queueable;
 

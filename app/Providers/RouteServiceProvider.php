@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Providers;
+namespace Hospms\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Hotpms\Http\Controllers';
+    protected $namespace = 'Hospms\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

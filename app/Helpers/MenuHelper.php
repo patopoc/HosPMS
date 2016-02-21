@@ -1,8 +1,8 @@
 <?php
-namespace Hotpms\Helpers;
+namespace Hospms\Helpers;
 use Illuminate\Support\Facades\Auth;
-use Hotpms\Menu;
-use Hotpms\RoleDetail;
+use Hospms\Menu;
+use Hospms\RoleDetail;
 class MenuHelper{
 	
 	public static function create(){

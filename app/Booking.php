@@ -1,9 +1,9 @@
 <?php
 
-namespace Hotpms;
+namespace Hospms;
 
 use Illuminate\Database\Eloquent\Model;
-use Hotpms\Helpers\DateHelper;
+use Hospms\Helpers\DateHelper;
 
 class Booking extends Model
 {
@@ -15,23 +15,23 @@ class Booking extends Model
 							'pets', 'rate_plan', 'notification','status'] ;
 	
 	public function property(){
-		return $this->hasOne('Hotpms\Property','id','id_property');
+		return $this->hasOne('Hospms\Property','id','id_property');
 	}
 	
 	public function user(){
-		return $this->hasOne('Hotpms\User','id','id_user');
+		return $this->hasOne('Hospms\User','id','id_user');
 	}
 	
 	public function personData(){
-		return $this->hasOne('Hotpms\Person','id','person');
+		return $this->hasOne('Hospms\Person','id','person');
 	}
 	
 	public function roomType(){
-		return $this->hasOne('Hotpms\RoomType','id','id_room_type');
+		return $this->hasOne('Hospms\RoomType','id','id_room_type');
 	}
 	
 	public function rate(){
-		return $this->hasOne('Hotpms\Rate','id','rate_plan');
+		return $this->hasOne('Hospms\Rate','id','rate_plan');
 	}
 	
 	public function getTotalPriceAttribute(){

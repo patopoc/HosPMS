@@ -1,6 +1,6 @@
 <?php
 
-namespace Hotpms\Providers;
+namespace Hospms\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

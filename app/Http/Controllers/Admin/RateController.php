@@ -1,15 +1,15 @@
 <?php
 
-namespace Hotpms\Http\Controllers\Admin;
+namespace Hospms\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Hotpms\Http\Requests;
-use Hotpms\Http\Controllers\Controller;
-use Hotpms\Http\Requests\CreateRateRequest;
+use Hospms\Http\Requests;
+use Hospms\Http\Controllers\Controller;
+use Hospms\Http\Requests\CreateRateRequest;
 use Illuminate\Support\Facades\Session;
-use Hotpms\Http\Requests\EditRateRequest;
-use Hotpms\Rate;
+use Hospms\Http\Requests\EditRateRequest;
+use Hospms\Rate;
 use Illuminate\Support\Facades\Route;
 
 class RateController extends Controller
