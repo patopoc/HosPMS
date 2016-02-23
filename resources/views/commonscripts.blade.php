@@ -93,7 +93,7 @@ $(document).ready(function(){
 		
 	addItem= function(el, container, jsonValues, namePrefix){
 		if(itemCounter == -1)
-			itemCounter = $("#" + container).children().length - 2;
+			itemCounter = $("#" + container).children().length - 1;
 
 		console.log("before add: "+ itemCounter + "item: " + el.name.split(namePrefix)[1]);
 		

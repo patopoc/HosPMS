@@ -29,6 +29,10 @@ $(document).ready(function(){
         getPersonData($(this).val());
     });
 
+	@if(isset($data['model'])) 		  
+    	getPersonData("{{$data['model']->person->ci}}");    
+    @endif
+
 });
 </script>
 @endsection

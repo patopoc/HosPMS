@@ -13,13 +13,15 @@ use Hospms\Http\Requests\CreatePersonRequest;
 use Hospms\Http\Requests\EditPersonRequest;
 use Illuminate\Database\QueryException;
 use Hospms\Helpers\ModelHelper;
+use Hospms\Department;
+use Hospms\Http\Requests\CreateDepartmentRequest;
+use Hospms\Http\Requests\EditDepartmentRequest;
 
 
-class PeopleController extends Controller
+class DepartmentController extends Controller
 {
 	
-	public $countriesShortList;
-	
+
 	private $data;
 	
 	public function __construct(){
@@ -30,9 +32,8 @@ class PeopleController extends Controller
 		//take the controller name from the route name		
 		$this->data["controllerRouteName"]= explode(".", $currentRoute)[1];		
 		
-		$this->middleware('set_current_section:'.$currentRoute);
+		$this->middleware('set_current_section:'.$currentRoute);	
 		
-		$this->countriesShortList= \DB::table('countries')->lists('name', 'country_code');
 	}
 	
     /**
@@ -42,29 +43,21 @@ class PeopleController extends Controller
      */
     public function index(Request $request)    
     {
-    	$people=null;
     	$labels= [
-    			"key" => "models.person",
+    			"key" => "models.department",
     			"title" => "titleList",
-    			"list" => [
-    					"ci" => "link",
+    			"list" => [    					
     					"name" => "text",
-    					"last_name" => "text",
-    					"country" => "text",
+    					"description" => "text",    					
     			],
     	];
     	   	
-    	if($request->has('name')){
-			$people= Person::name($request->get('name'))->paginate(10);    	
-    	}
-    	else{
-			$people= Person::paginate(5);
-    	}
+    	$department= Department::paginate(10);    	
+    	
     	
     	$data= $this->data;
     	$data["labels"]= $labels;
-    	$data["model"]= $people;
-    	
+    	$data["models"]= $department;
 		return view('admin.commoncrud.index', compact('data'));		
     }
 
@@ -76,21 +69,17 @@ class PeopleController extends Controller
     public function create()
     {    	  
     	$fields= [
-    			"key" => "models.person",
+    			"key" => "models.department",
     			"title" => "titleCreate",
     			"fields" => [
-    					"ci" => "text",
     					"name" => "text",
-    					"last_name" => "text",
-    					"email" => "email",
-    					"telephone" => "text",
-    					"id_country" => "select",
+    					"description" => "text",    					
     			],
     	];
     	
     	$data= $this->data;
-    	$data['fieldsData']= $fields;    	
-    	$data['selectData']['id_country']= array(""=>"Select Country") + $this->countriesShortList;    	
+    	$data['fieldsData']= $fields;   
+   	
     	return view('admin.commoncrud.create', compact('data'));
     }
 
@@ -100,11 +89,11 @@ class PeopleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePersonRequest $request)
+    public function store(CreateDepartmentRequest $request)
     {
-        Person::create($request->all());
+        Department::create($request->all());
         
-        return \Redirect::route('admin.people.index');
+        return \Redirect::route('admin.departments.index');
     }
 
     /**
@@ -127,24 +116,17 @@ class PeopleController extends Controller
     public function edit($id)
     {
     	$fields= [
-    			"key" => "models.person",
+    			"key" => "models.department",
     			"title" => "titleEdit",
     			"fields" => [
-    					"ci" => "text",
     					"name" => "text",
-    					"last_name" => "text",
-    					"email" => "email",
-    					"telephone" => "text",
-    					"id_country" => "select",
+    					"description" => "text",    					
     			],
-    			
     	];
     	
     	$data= $this->data;
     	$data['fieldsData']= $fields;
-        $data["model"]= Person::findOrFail($id);
-        $data["selectData"]['id_country']= array(""=>"Select Country") + $this->countriesShortList;
-        
+        $data["models"]= Department::findOrFail($id);        
         
         return view('admin.commoncrud.edit', compact('data'));
     }
@@ -156,12 +138,12 @@ class PeopleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditPersonRequest $request, $id)
+    public function update(EditDepartmentRequest $request, $id)
     {
-        $person= Person::findOrFail($id);
-        $person->fill($request->all());
-        $person->save();
-        $message= $person->full_name. 'updated successfully';
+        $department= Department::findOrFail($id);
+        $department->fill($request->all());
+        $department->save();
+        $message= $department->name. 'updated successfully';
         
         if($request->ajax()){
         	return $message;
@@ -169,7 +151,7 @@ class PeopleController extends Controller
         
         Session::flash('message', $message);        
         
-        return redirect()->route('admin.people.index');
+        return redirect()->route('admin.departments.index');
   
     }
 
@@ -181,12 +163,12 @@ class PeopleController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        $person= Person::findOrFail($id);
+        $department= Department::findOrFail($id);
         
         $message="";
         try{
-        	$person->delete();
-        	$message= trans('appstrings.item_removed', ['item' => $person->full_name]);
+        	$department->delete();
+        	$message= trans('appstrings.item_removed', ['item' => $department->name]);
         	Session::flash('message_type', 'success');
         }
         catch(\PDOException $e){

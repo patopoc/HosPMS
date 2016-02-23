@@ -10,9 +10,7 @@ class Property extends Model
     
     public $timestamps= false;
     
-    protected $fillable= ['name','info','address','checkin_time','checkout_time','cancelation_policy',
-    						'time_zone', 'conditions', 'pet_rules'
-    ];
+    protected $fillable= ['name','info','address', 'time_zone', 'phone', 'currency', 'email', 'lang', 'text_alignment' ];
     
     public function pictures(){
     	return $this->hasMany('Hospms\Picture','id_module','id');

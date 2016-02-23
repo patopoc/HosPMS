@@ -4,7 +4,7 @@ namespace Hospms\Http\Requests;
 
 use Hospms\Http\Requests\Request;
 
-class CreateFacilityRequest extends Request
+class CreatePatientRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class CreateFacilityRequest extends Request
     public function rules()
     {
         return [
-        		'name' => 'required | unique:services,name',        		
-        		
+        		'ci' => 'required',
+        		'name'=> 'required',
+        		'last_name' => 'required'
         ];
     }
 }

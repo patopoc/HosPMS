@@ -14,11 +14,15 @@ use Hospms\Helpers\PictureHelper;
 
 class PropertyController extends Controller
 {
+	private $data;
 	public function __construct(){
 	
 		$this->middleware('access_control');
 		$currentRoute= $this->getRouter()->current()->getAction()["as"];
 		$this->middleware('set_current_section:'.$currentRoute);
+		
+		$this->data["langs"]= \DB::table('languages')->lists('name','id');
+		$this->data["currencies"]= \DB::table('countries')->where('currency','<>','')->lists('currency','currency_code');
 	}
     /**
      * Display a listing of the resource.
@@ -26,9 +30,11 @@ class PropertyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $properties= Property::all();
-        return view('admin.property.index', compact('properties'));
+    {        
+        $data= $this->data;
+        $data['property']= Property::findOrFail(1);
+     
+        return view('admin.property.edit', compact('data'));
     }
 
     /**
@@ -103,6 +109,8 @@ class PropertyController extends Controller
         	return $message;
         }
         Session::flash('message',$message);
+        
+        session('current_property')->load('pictures');
         return redirect()->route('admin.property.index');
     }
 
@@ -115,7 +123,7 @@ class PropertyController extends Controller
     public function destroy($id, Request $request)
     {
     	
-        $property= Property::findOrFail($id);
+        /*$property= Property::findOrFail($id);
             $message="";
         
         try{
@@ -135,6 +143,6 @@ class PropertyController extends Controller
         if($request->ajax()){
         	return ['code'=>'error', 'message' => $message];
         }Session::flash('message',$message);
-        return redirect()->route('admin.property.index');
+        return redirect()->route('admin.property.index');*/
     }
 }

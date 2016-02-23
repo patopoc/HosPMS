@@ -4,12 +4,14 @@ namespace Hospms\Http\Requests;
 
 use Hospms\Http\Requests\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Input;
 
-class EditFacilityRequest extends Request
+class EditDepartmentRequest extends Request
 {
 	private $route;
 	public function __construct(Route $route){
 		$this->route= $route;
+		
 	}
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +31,7 @@ class EditFacilityRequest extends Request
     public function rules()
     {
         return [
-        		'name' => 'required | unique:services,name,'. $this->route->getParameter('facilities'),        				
-        		
+        		'name' => 'required | unique:departments,id,'. $this->route->getParameter('department'),        		        		
         ];
     }
 }

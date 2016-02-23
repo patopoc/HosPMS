@@ -5,10 +5,9 @@ class ArrayCheckHelper{
 	
 	public static function ignoreRepeated($data, $prefix){
 		$items= array();
-		
-		foreach($data as $key => $val){
-			if(preg_match("%^". $prefix ."[0-9]+$%", $key) && $val !== "" && $key != 0){
-				
+		$wtf=array();
+		foreach($data as $key => $val){$wtf[]=$key;
+			if(preg_match("%^". $prefix ."[0-9]+$%", $key) && $val !== "" && $val !== "0" && $key != "0"){
 				//check that a value doesn't repeat
 				$repeatedVal= false;
 				foreach($items as $item){
@@ -21,7 +20,6 @@ class ArrayCheckHelper{
 					$items[]= $val;
 			}
 		}
-		//dd($items);
 		return $items;
 	}
 }

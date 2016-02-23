@@ -15,7 +15,7 @@ class Menu extends Model
      */
     protected $table = 'menu';
     
-    protected $fillable = ['name','description','icon','route','type','id_module','action','id_section'];    
+    protected $fillable = ['name','description','icon','route','type','id_module','action','id_section', 'params'];    
     
     public $timestamps= false;
 }

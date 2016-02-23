@@ -14,9 +14,17 @@ class SetCurrentSection
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $currentRoute)
+    public function handle($request, Closure $next, $currentRoute, $name=null)
     {
-    	$menuItem= Menu::where('route',$currentRoute)->first();
+    	$menuItem= null;
+    	if($name == null){
+    		$menuItem= Menu::where('route',$currentRoute)->first();
+    	}
+    	else{
+    		$menuItem= Menu::where('route',$currentRoute)
+    						->where('name', $name)
+    						->first();
+    	}
     	
     	if($menuItem !== null){
     		$section= Menu::findOrFail($menuItem->id_section); 

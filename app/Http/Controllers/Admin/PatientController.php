@@ -13,26 +13,38 @@ use Hospms\Http\Requests\CreatePersonRequest;
 use Hospms\Http\Requests\EditPersonRequest;
 use Illuminate\Database\QueryException;
 use Hospms\Helpers\ModelHelper;
+use Hospms\Department;
+use Hospms\Http\Requests\CreateDepartmentRequest;
+use Hospms\Http\Requests\EditDepartmentRequest;
+use Hospms\Staff;
+use Hospms\StaffType;
+use Hospms\Http\Requests\CreateStaffTypeRequest;
+use Hospms\Http\Requests\CreateStaffRequest;
+use Hospms\Http\Requests\EditStaffRequest;
+use Hospms\Patient;
+use Hospms\Http\Requests\CreatePatientRequest;
+use Hospms\Http\Requests\EditPatientRequest;
 
 
-class PeopleController extends Controller
+class PatientController extends Controller
 {
-	
-	public $countriesShortList;
-	
+
 	private $data;
 	
 	public function __construct(){
-		
 		$this->middleware('access_control');
 		$currentRoute= $this->getRouter()->current()->getAction()["as"];
 		
 		//take the controller name from the route name		
 		$this->data["controllerRouteName"]= explode(".", $currentRoute)[1];		
 		
-		$this->middleware('set_current_section:'.$currentRoute);
+		$this->middleware('set_current_section:'.$currentRoute);	
 		
-		$this->countriesShortList= \DB::table('countries')->lists('name', 'country_code');
+		$countriesShortList= \DB::table('countries')->lists('name', 'country_code');
+		$this->data['selectData']['id_country']= array(""=>"Select Country") + $countriesShortList;
+		
+		$bloodGroups= \DB::table('blood_groups')->lists('name', 'id');
+		$this->data['selectData']['id_blood_group']= array(""=>"Select Blood Type") + $bloodGroups;
 	}
 	
     /**
@@ -42,28 +54,24 @@ class PeopleController extends Controller
      */
     public function index(Request $request)    
     {
-    	$people=null;
     	$labels= [
-    			"key" => "models.person",
+    			"key" => "models.patient",
     			"title" => "titleList",
-    			"list" => [
+    			"list" => [   
     					"ci" => "link",
-    					"name" => "text",
-    					"last_name" => "text",
-    					"country" => "text",
+    					"full_name" => "text",
+    					"email" => "text",
+    					"blood_group" => "text",
     			],
     	];
     	   	
-    	if($request->has('name')){
-			$people= Person::name($request->get('name'))->paginate(10);    	
-    	}
-    	else{
-			$people= Person::paginate(5);
-    	}
+    	   	
+    	$patient= Patient::paginate(10);    	
+    	
     	
     	$data= $this->data;
     	$data["labels"]= $labels;
-    	$data["model"]= $people;
+    	$data["models"]= $patient;
     	
 		return view('admin.commoncrud.index', compact('data'));		
     }
@@ -76,21 +84,25 @@ class PeopleController extends Controller
     public function create()
     {    	  
     	$fields= [
-    			"key" => "models.person",
+    			"key" => "models.patient",
     			"title" => "titleCreate",
     			"fields" => [
     					"ci" => "text",
     					"name" => "text",
     					"last_name" => "text",
+    					"gender" => "text",
     					"email" => "email",
     					"telephone" => "text",
     					"id_country" => "select",
+    					"id_blood_group" => "select",
+    					"birth_date" => "text",
+    					"id_picture" => "text",
     			],
     	];
     	
+    	
     	$data= $this->data;
-    	$data['fieldsData']= $fields;    	
-    	$data['selectData']['id_country']= array(""=>"Select Country") + $this->countriesShortList;    	
+    	$data['fieldsData']= $fields;   
     	return view('admin.commoncrud.create', compact('data'));
     }
 
@@ -100,11 +112,32 @@ class PeopleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePersonRequest $request)
+    public function store(CreatePatientRequest $request)
     {
-        Person::create($request->all());
+    	if(count(Person::where('ci',$request->get('ci'))->get()) == 0){
+    		Person::create([
+    				'ci' => $request->get('ci'),
+    				'name' => $request->get('name'),
+    				'last_name' => $request->get('last_name'),
+    				'gender' => $request->get('gender'),
+    				'email' => $request->get('email'),
+    				'telephone' => $request->get('telephone'),
+    				'id_country' => $request->get('id_country'),
+    				'id_blood_group' => $request->get('id_blood_group'),
+    				'birth_date' => $request->get("birth_date"),
+    				'id_picture' => $request->get("id_picture"),
+    		]);
+    	}
+    	 
+    	$person= Person::where('ci',$request->get('ci'))->get()->first();
         
-        return \Redirect::route('admin.people.index');
+        $patient= new Patient([
+        		"id_person" => $person->id,        		        
+        ]);
+        
+        $patient->save();        
+        
+        return redirect()->route("admin.patients.index");
     }
 
     /**
@@ -127,24 +160,26 @@ class PeopleController extends Controller
     public function edit($id)
     {
     	$fields= [
-    			"key" => "models.person",
-    			"title" => "titleEdit",
+    			"key" => "models.patient",
+    			"title" => "titleCreate",
     			"fields" => [
     					"ci" => "text",
     					"name" => "text",
     					"last_name" => "text",
+    					"gender" => "text",
     					"email" => "email",
     					"telephone" => "text",
     					"id_country" => "select",
+    					"id_blood_group" => "select",
+    					"birth_date" => "text",
+    					"id_picture" => "text",
     			],
-    			
     	];
     	
+    	
     	$data= $this->data;
-    	$data['fieldsData']= $fields;
-        $data["model"]= Person::findOrFail($id);
-        $data["selectData"]['id_country']= array(""=>"Select Country") + $this->countriesShortList;
-        
+    	$data['fieldsData']= $fields;       	
+        $data["model"]= Patient::findOrFail($id);       
         
         return view('admin.commoncrud.edit', compact('data'));
     }
@@ -156,20 +191,36 @@ class PeopleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditPersonRequest $request, $id)
+    public function update(EditPatientRequest $request, $id)
     {
-        $person= Person::findOrFail($id);
-        $person->fill($request->all());
-        $person->save();
-        $message= $person->full_name. 'updated successfully';
+    	$person= Person::where('ci',$request->get('ci'))->get()->first();
+    	$person->fill([
+    			'name' => $request->get('name'),
+    			'last_name' => $request->get('last_name'),
+    			'gender' => $request->get('gender'),
+    			'email' => $request->get('email'),
+    			'telephone' => $request->get('telephone'),
+    			'id_country' => $request->get('id_country'),
+    			'id_blood_group' => $request->get('id_blood_group'),
+    			'birth_date' => $request->get("birth_date"),
+    			'id_picture' => $request->get("id_picture"),
+    	]);
+    	$person->save();
+    	
+        $model= Patient::findOrFail($id);
+        
+        $model->fill([
+        		"id_person" => $person->id,
+        ]);
+        $model->save();
+        $message= $model->name. 'updated successfully';
         
         if($request->ajax()){
         	return $message;
         }
-        
+                
         Session::flash('message', $message);        
-        
-        return redirect()->route('admin.people.index');
+        return redirect()->route("admin.patients.index");        
   
     }
 
@@ -181,12 +232,12 @@ class PeopleController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        $person= Person::findOrFail($id);
+        $patient= Patient::findOrFail($id);
         
         $message="";
         try{
-        	$person->delete();
-        	$message= trans('appstrings.item_removed', ['item' => $person->full_name]);
+        	$patient->delete();
+        	$message= trans('appstrings.item_removed', ['item' => $patient->person->full_name]);
         	Session::flash('message_type', 'success');
         }
         catch(\PDOException $e){
@@ -208,6 +259,6 @@ class PeopleController extends Controller
         
         Session::flash('message', $message);              
         
-        return redirect()->route('admin.people.index');
+        return redirect()->route("admin.patients.index");
     }
 }

@@ -43,9 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','set_current_property
 	Route::resource('property','PropertyController');
 	Route::resource('rate', 'RateController');
 	Route::resource('services', 'ServicesController');
-	Route::resource('facilities', 'FacilitiesController');
 	Route::resource('service_plans', 'ServicePlanController');
-	Route::resource('facility_plans', 'FacilityPlanController');
 	Route::resource('bed_types', 'BedTypeController');
 	Route::resource('room_types', 'RoomTypeController');
 	Route::resource('users', 'UserController');
@@ -53,5 +51,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','set_current_property
 	Route::resource('role_details', 'RoleDetailController');
 	Route::resource('menus', 'MenuController');
 	Route::resource('availability', 'AvailabilityController');
-	
+	Route::resource('availability', 'AvailabilityController');
+	Route::resource('departments', 'DepartmentController');
+	Route::resource('staff', 'StaffController');
+	Route::resource('staff_types', 'StaffTypeController');
+	Route::resource('patients', 'PatientController');
 });

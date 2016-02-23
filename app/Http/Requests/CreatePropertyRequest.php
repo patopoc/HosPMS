@@ -27,12 +27,7 @@ class CreatePropertyRequest extends Request
         		'name' => 'required | unique:property_settings,name',
         		'info'=> '',
         		'address'=>'required',
-        		'checkin_time' => '',
-        		'checkout_time' => 'required',
-        		'cancelation_policy' => 'required',
-        		'timezone'=>'', 
-        		'conditions' => '', 
-        		'pet_rules' => ''
+        		
         ];
     }
 }

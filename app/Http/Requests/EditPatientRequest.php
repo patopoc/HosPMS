@@ -4,12 +4,14 @@ namespace Hospms\Http\Requests;
 
 use Hospms\Http\Requests\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Input;
 
-class EditFacilityPlanRequest extends Request
+class EditPatientRequest extends Request
 {
 	private $route;
 	public function __construct(Route $route){
 		$this->route= $route;
+		
 	}
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +30,9 @@ class EditFacilityPlanRequest extends Request
      */
     public function rules()
     {
-        return [
-        		'name' => 'required | unique:services,name,'. $this->route->getParameter('facility_plans'),        				
-        		
+        return [        		
+        		'name'=> 'required',
+        		'last_name' => 'required'        		
         ];
     }
 }

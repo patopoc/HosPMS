@@ -2,12 +2,11 @@
 		
 		<tr>
 		@foreach ($data["labels"]["list"] as $label => $type)
-			<th>{{ trans("appstrings." . $data["labels"]["key"] . ".labels." . $label) }}</th>			
+			<th>{{ trans("appstrings." . $data["labels"]["key"] . ".labels." . $label) }}</th>						
 		@endforeach
 			<th>{{ trans("appstrings.models.actions") }}</th>
 		</tr>
-				
-		@foreach ($data["model"] as $model)
+		@foreach ($data["models"] as $model)		
 		<tr data-id="{{$model->id}}">			
 			@foreach ($data["labels"]["list"] as $label => $type)	
 								
@@ -23,13 +22,12 @@
 				@endif
 				
 			@endforeach
-			
 			<td>
 				<a href="{{ route('admin.'. $data['controllerRouteName'] .'.edit', $model) }}" class='btn btn-warning btn-sm' role='button'><span class="glyphicon glyphicon-pencil"></span></a>
 				<a href="#" class="btn-delete btn btn-danger btn-sm" role='button'><span class="glyphicon glyphicon-minus-sign"></span></a>
 			</td>
 			
-		</tr>	
+		</tr>
 		@endforeach
 				
 	</table>

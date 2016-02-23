@@ -3,14 +3,9 @@
 namespace Hospms\Http\Requests;
 
 use Hospms\Http\Requests\Request;
-use Illuminate\Routing\Route;
 
-class EditPropertyRequest extends Request
+class CreateStaffRequest extends Request
 {
-	private $route;
-	public function __construct(Route $route){
-		$this->route= $route;
-	}
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,10 +24,8 @@ class EditPropertyRequest extends Request
     public function rules()
     {
         return [
-        		'name' => 'required | unique:property_settings,name,'. $this->route->getParameter('property'),
-        		'info'=> '',
-        		'address'=>'required',
-        		
+        		'ci' => 'required',        		
+        		'id_department' => 'required',
         ];
     }
 }

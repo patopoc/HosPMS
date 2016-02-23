@@ -26,5 +26,5 @@
 @endsection
 
 @include('commonscripts')
-@include('admin.people.partials.scripts')
+@include('admin.property.partials.scripts')
 @include('menu')

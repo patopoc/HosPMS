@@ -31,7 +31,11 @@ $menu= MenuHelper::create();
 	                            @endif
 	                                <li>
 	                                    @if($menuItem->route !== '' && Route::has($menuItem->route))
-	                                    	<a href="{{route($menuItem->route)}}">
+	                                    	@if($menuItem->params != "")
+	                                    		<a href="{{route($menuItem->route)}}?{{$menuItem->params}}">
+	                                    	@else
+	                                    		<a href="{{route($menuItem->route)}}">
+	                                    	@endif
 	                                    @else
 	                                    	<a href="#">
 	                                    @endif

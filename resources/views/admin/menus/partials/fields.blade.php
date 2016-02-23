@@ -38,3 +38,8 @@
  	{!! Form::select('id_section', ['' => 'Select Section'] + $data["menuSections"], null, ['class' => 'form-control']) !!}	 	
     
 </div>
+<div class="form-group">
+ 	{!! Form::label('params', 'Parameters (optional)') !!}
+ 	{!! Form::text('params', null, ['class' => 'form-control']) !!}	 	
+    
+</div>

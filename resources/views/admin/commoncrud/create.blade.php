@@ -10,8 +10,8 @@
 @include('admin.commoncrud.partials.messages')
 
 {!!Form::open(['route' => 'admin.'. $data['controllerRouteName'] .'.store', 'method' => 'post'])!!}
-		 @include('admin.commoncrud.partials.scripts')
-		 @include('admin.commoncrud.partials.fields')
+		 @include('admin.commoncrud.partials.scripts')		 
+		 @include('admin.commoncrud.partials.fields')		 
 		  <button type="submit" class="btn btn-success">Create</button>
 	{!!Form::close()!!}
 </div>
@@ -19,4 +19,6 @@
 </div>
 </div>
 @endsection
+
 @include('menu')
+@include('commonscripts')

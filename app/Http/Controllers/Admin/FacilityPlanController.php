@@ -22,14 +22,20 @@ class FacilityPlanController extends Controller
 	
 		$this->middleware('access_control');
 		$currentRoute= $this->getRouter()->current()->getAction()["as"];
+		
+		//take the controller name from the route name
+		$this->data["controllerRouteName"]= explode(".", $currentRoute)[1];
+		
 		$this->middleware('set_current_section:'.$currentRoute);
 		
 		$facilities= \DB::table("facilities")->lists('name','id');
 		 
-		$facilitiesArray[]= array(
+		/*$facilitiesArray[]= array(
 				"key" => 0,
 				"val" => "Select Facility"
-		);
+		);*/
+		
+		$facilities= array("0" => "Select Facility") + $facilities;
 		 
 		foreach($facilities as $key => $val){
 			$facilitiesArray[]= [
@@ -38,8 +44,11 @@ class FacilityPlanController extends Controller
 			];
 		}
 		
-		$this->data["facilities"]= $facilities;
-		$this->data['facilitiesJson']= $facilitiesArray;
+		//$this->data["facilities"]= $facilities;
+		//$this->data['facilitiesJson']= $facilitiesArray;
+		
+		$this->data['selectData']['facilities']= $facilities;
+		$this->data['selectData']['facilitiesJson']= $facilitiesArray;
 		
 	}
     /**
@@ -61,8 +70,24 @@ class FacilityPlanController extends Controller
     public function create()
     {
     	
-    	$data= $this->data;  
-    	return view('admin.facility_plans.create', compact('data'));
+    	//$data= $this->data;  
+    	//return view('admin.facility_plans.create', compact('data'));
+    	
+    	$fields= [
+    			"key" => "models.facility_plan",
+    			"title" => "titleCreate",
+    			"fields" => [
+    					"name" => "text",
+    					"facilities" => "select-group",    					
+    			],
+    			 
+    	];
+    	
+    	$data= $this->data;
+    	$data['fieldsData']= $fields;
+    	
+    	return view('admin.commoncrud.create', compact('data'));
+    	
     }
 
     /**
@@ -75,8 +100,7 @@ class FacilityPlanController extends Controller
     {       	
         //$data= $request->all();
         $facilityKeys= array();
-        
-        $facilityKeys= ArrayCheckHelper::ignoreRepeated($request->all(), "facility");
+        $facilityKeys= ArrayCheckHelper::ignoreRepeated($request->all(), "facilities");
         /*foreach($request->all() as $key => $val){
         	if(preg_match("%^facility[0-9]+$%", $key) && $val !== ""){
         		//check that a value doesn't repeat
@@ -95,7 +119,6 @@ class FacilityPlanController extends Controller
         	if($key !== "_token" && $key !=="name")
         		$facilityKeys[]= $val;	
         } */      
-        
     	$facility_plan= FacilityPlan::create($request->all());
     	$facility_plan->facilities()->attach($facilityKeys);
         
@@ -122,11 +145,26 @@ class FacilityPlanController extends Controller
     public function edit($id)
     {
     	
+    	$fields= [
+    			"key" => "models.facility_plan",
+    			"title" => "titleEdit",
+    			"fields" => [
+    					"name" => "text",
+    					"facilities" => "select-group",    					
+    			],
+    			 
+    	];
+    	
     	$data= $this->data;
+    	$data['fieldsData']= $fields;
+    	    	
         $facility_plan= FacilityPlan::findOrFail($id);        
-        $data['facility_plan']= $facility_plan;        
+        //$data['facility_plan']= $facility_plan;        
         
-        return view('admin.facility_plans.edit', compact('data'));
+        //return view('admin.facility_plans.edit', compact('data'));
+        $data['model']= $facility_plan;
+        return view('admin.commoncrud.edit', compact('data'));
+        
     }
 
     /**
@@ -138,7 +176,7 @@ class FacilityPlanController extends Controller
      */
     public function update(EditFacilityPlanRequest $request, $id)
     {
-    	$facilityKeys= ArrayCheckHelper::ignoreRepeated($request->all(), "facility");
+    	$facilityKeys= ArrayCheckHelper::ignoreRepeated($request->all(), "facilities");
     	
     	/*foreach($request->all() as $key => $val){
     		if($key !== "_token" && $key !=="name")
@@ -171,8 +209,13 @@ class FacilityPlanController extends Controller
         $facility= FacilityPlan::findOrFail($id);
         $message="";
         
-        try{
+        try{       	        	
         	$facility->delete();
+        	
+        	\DB::table("facilities_facilities_plan")
+        	->where("id_facilities_plan", $id)
+        	->delete();
+        	
         	$message= trans('appstrings.item_removed', ['item' => $facility->name]);
         	Session::flash('message_type', 'success');
         }
@@ -181,13 +224,20 @@ class FacilityPlanController extends Controller
         	if($message == 'sqlmessages.' . $e->getCode()){
         		$message= trans('sqlmessages.undefined');
         	}
+        	
+        	if($request->ajax()){
+        		return ['code'=>'error', 'message' => $message];
+        	}
+        	
         	Session::flash('message_type', 'error');
         }
         
         if($request->ajax()){
-        	return ['code'=>'error', 'message' => $message];
+        	return ['code'=>'ok', 'message' => $message];
         }
-        Session::flash('message',$message);
+        
+        Session::flash('message', $message);
+        
         return redirect()->route('admin.facility_plans.index');
     }
 }

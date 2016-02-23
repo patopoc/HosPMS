@@ -6,12 +6,16 @@ class Person extends Model{
 	
 	public $timestamps= false;
 	
-	protected $fillable = ['ci', 'name', 'last_name', 'email', 'telephone', 'id_country'];
+	protected $fillable = ['ci', 'name', 'last_name', 'email', 'telephone', 
+							'id_country', 'id_blood_group', 'birth_date', 'id_picture'];
 	
 	public function country(){
-		return $this->hasOne("Hospms\Country","country_code", "id_country");
+		return $this->hasOne("Hospms\Country","id", "id_country");
 	}
 	
+	public function bloodGroup(){
+		return $this->hasOne("Hospms\BloodGroup", "id", "id_blood_group");
+	}
 	public function getFullNameAttribute(){
 		return $this->name . " " . $this->last_name;
 	}
@@ -22,7 +26,12 @@ class Person extends Model{
 		}
 	}
 	
-	public function fullData(){
+	public function picture(){
+		return $this->hasOne('Hospms\Picture', 'id', 'id_picture');
+	}
+	
+	public function fullData(){ 
+		
 		$data= [
 				'ci' => $this->ci,
 				'name' =>$this->name,
@@ -31,7 +40,7 @@ class Person extends Model{
 				'telephone' => $this->telephone,
 				'country' => $this->country->name
 		];
-		
+				
 		return $data;
 	}
 	
